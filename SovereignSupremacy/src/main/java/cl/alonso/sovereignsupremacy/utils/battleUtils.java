@@ -2,29 +2,29 @@ package cl.alonso.sovereignsupremacy.utils;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import cl.alonso.sovereignsupremacy.core.Army;
+import cl.alonso.sovereignsupremacy.core.Troop;
 
 public class battleUtils {
 
-    public static void biAttack(Army army1, Army army2) {
-        int attack1 = ThreadLocalRandom.current().nextInt(army1.minDamage(), army1.damage() + 1);
-        int attack2 = ThreadLocalRandom.current().nextInt(army2.minDamage(), army2.damage() + 1);
+    public static void troopFight(Troop troop1, Troop troop2) {
+        int attack1 = ThreadLocalRandom.current().nextInt(troop1.minDamage(), troop1.maxDamage() + 1);
+        int attack2 = ThreadLocalRandom.current().nextInt(troop2.minDamage(), troop2.maxDamage() + 1);
 
-        army1.setCurrentSoldiers(army1.getCurrentSoldiers() - attack2);
-        army2.setCurrentSoldiers(army2.getCurrentSoldiers() - attack1);
+        troop1.setCurrentSoldiers(troop1.getCurrentSoldiers() - attack2);
+        troop2.setCurrentSoldiers(troop2.getCurrentSoldiers() - attack1);
 
-        System.out.println(army1.getName() + " Ataca a " + army2.getName() + " Causando " + attack1 + " bajas! ");
-        System.out.println(army2.getName() + " Ataca a " + army1.getName() + " Causando " + attack2 + " bajas! ");
+        System.out.println(troop1.getName() + " Ataca a " + troop2.getName() + " Causando " + attack1 + " bajas! ");
+        System.out.println(troop2.getName() + " Ataca a " + troop1.getName() + " Causando " + attack2 + " bajas! ");
 
-        army1.printState();
-        army2.printState();
+        troop1.printState();
+        troop2.printState();
 
         for (int i = 0; i < 30; i++) {
             System.out.print("-");
         }
         System.out.println();
 
-        if (army1.getCurrentSoldiers() == 0 || army2.getCurrentSoldiers() == 0) { System.exit(0); }
+        if (troop1.getCurrentSoldiers() == 0 || troop2.getCurrentSoldiers() == 0) { System.exit(0); }
 
     }
 

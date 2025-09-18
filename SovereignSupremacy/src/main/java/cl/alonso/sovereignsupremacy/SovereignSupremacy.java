@@ -2,12 +2,13 @@ package cl.alonso.sovereignsupremacy;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import cl.alonso.sovereignsupremacy.core.Army;
 import cl.alonso.sovereignsupremacy.core.Country;
 import cl.alonso.sovereignsupremacy.core.Sector;
+import cl.alonso.sovereignsupremacy.core.Troop;
 import cl.alonso.sovereignsupremacy.utils.battleUtils;
 import cl.alonso.sovereignsupremacy.utils.worldUtils;
 
+// Currently building the program, so this is just pure testing
 public class SovereignSupremacy {
     public static void main( String[] args )
     {
@@ -59,19 +60,28 @@ public class SovereignSupremacy {
         System.out.println("Oeste: " + mySector.getWest().getName()+" ("+mySector.getWest().getID()+")");
         System.out.println();
 
-        Country japon = new Country("Japon");
-        Army alpha = new Army("Tokio", japon, 1000, 0.1, 0.1);
-        alpha.printStats();
+        Country alpha = new Country("Alpha");
+        Troop alpha0 = new Troop("AlphaZero", alpha, 1000, 0.1, 0.1);
+        alpha0.printStats();
 
-        Country chile = new Country("Chile");
-        Army beta = new Army("Talca", chile, 1000, 0.1, 0.1);
-        beta.printStats();
+        Country beta = new Country("Beta");
+        Troop beta0 = new Troop("BetaZero", beta, 1000, 0.1, 0.1);
+        beta0.printStats();
 
         int round = 1;
 
+        System.out.println(alpha0);
+        //Sleep for 2.5 seconds
+        try {
+            Thread.sleep(2500);
+        } catch (InterruptedException e) {
+            // e.printStackTrace();
+        }
+        System.out.println();
+
         while (true) {
             System.out.println("Ronda " + round + ": ");
-            battleUtils.biAttack(alpha, beta);
+            battleUtils.troopFight(alpha0, beta0);
             round++;
         }
     }

@@ -1,6 +1,6 @@
 package cl.alonso.sovereignsupremacy.core;
 
-public class Army {
+public class Troop {
     private String name;
     private Country countryOrigin;
     private int maxSoldiers;
@@ -8,7 +8,7 @@ public class Army {
     private double potential;
     private double discipline;
 
-    public Army(String name, Country countryOrigin, int maxSoldiers, double potential, double discipline) {
+    public Troop(String name, Country countryOrigin, int maxSoldiers, double potential, double discipline) {
         this.name = name;
         this.countryOrigin = countryOrigin;
         this.maxSoldiers = maxSoldiers;
@@ -45,25 +45,27 @@ public class Army {
         return result > 0 ? result : 1;
     }
 
-    public int damage() {return ceilToInt(this.currentSoldiers * this.potential);}
+    public int maxDamage() {return ceilToInt(this.currentSoldiers * this.potential);}
     public int minDamage() {return ceilToInt(this.currentSoldiers * (this.potential * this.discipline));}
 
     public void printStats() {
+        System.out.println("Informacion de la tropa:");
         System.out.println(" --- " + name + " --- ");
         System.out.println("Pais de Origen: " + countryOrigin.getName());
-        System.out.println("Soldados maximos: " + maxSoldiers);
-        System.out.println("Soldados restantes: " + currentSoldiers);
+        System.out.println("Soldados restantes: " + currentSoldiers + "/" + maxSoldiers);
+        System.out.println("Potencial: " + potential);
         System.out.println("Disciplina: " + discipline);
-        System.out.println("Daño maximo: " + damage());
+        System.out.println("Daño maximo: " + maxDamage());
         System.out.println("Daño minimo: " + minDamage());
         System.out.println();
     }
 
     public void printState() {
+        System.out.println("Estado de la tropa:");
         System.out.println(" --- " + name + " --- ");
         System.out.println("Pais de Origen: " + countryOrigin.getName());
         System.out.println("Soldados restantes: " + currentSoldiers);
-        System.out.println("Potencial de ataque: " + damage());
+        System.out.println("Daño maximo: " + maxDamage());
         System.out.println("Daño minimo: " + minDamage());
         System.out.println();
     }
