@@ -23,9 +23,5 @@ public class battleUtils {
             System.out.print("-");
         }
         System.out.println();
-
-        if (troop1.getCurrentSoldiers() == 0 || troop2.getCurrentSoldiers() == 0) { System.exit(0); }
-
     }
-
 }

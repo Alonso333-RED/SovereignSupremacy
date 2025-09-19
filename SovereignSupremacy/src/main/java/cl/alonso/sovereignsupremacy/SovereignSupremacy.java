@@ -59,16 +59,16 @@ public class SovereignSupremacy {
         System.out.println("Este: " + mySector.getEast().getName()+" ("+mySector.getEast().getID()+")");
         System.out.println("Oeste: " + mySector.getWest().getName()+" ("+mySector.getWest().getID()+")");
         System.out.println();
+        mySector.printInfo();
+        System.out.println();
 
         Country alpha = new Country("Alpha");
-        Troop alpha0 = new Troop("AlphaZero", alpha, 1000, 0.1, 0.1);
+        Troop alpha0 = new Troop("AlphaZero", alpha, mySector, 1000, 0.1, 0.1);
         alpha0.printStats();
 
         Country beta = new Country("Beta");
-        Troop beta0 = new Troop("BetaZero", beta, 1000, 0.1, 0.1);
+        Troop beta0 = new Troop("BetaZero", beta, mySector, 1000, 0.1, 0.1);
         beta0.printStats();
-
-        int round = 1;
 
         System.out.println(alpha0);
         //Sleep for 2.5 seconds
@@ -79,10 +79,19 @@ public class SovereignSupremacy {
         }
         System.out.println();
 
-        while (true) {
+        int round = 1;
+
+        System.out.println();
+        mySector.printInfo();
+        System.out.println();
+
+        while (alpha0.getCurrentSoldiers() > 0 && beta0.getCurrentSoldiers() > 0) {
             System.out.println("Ronda " + round + ": ");
             battleUtils.troopFight(alpha0, beta0);
             round++;
         }
+        System.out.println();
+        mySector.printInfo();
+        System.out.println();
     }
 }

@@ -1,20 +1,29 @@
 package cl.alonso.sovereignsupremacy.core;
 
+import cl.alonso.sovereignsupremacy.utils.troopUtils;
+
 public class Troop {
     private String name;
     private Country countryOrigin;
+    private Sector currentSector;
+
+    private final int MAX_SOLDIERS_POSSIBLE_VALUE = 1000000000;
     private int maxSoldiers;
     private int currentSoldiers;
     private double potential;
     private double discipline;
 
-    public Troop(String name, Country countryOrigin, int maxSoldiers, double potential, double discipline) {
+    public Troop(String name, Country countryOrigin, Sector currentSector, int maxSoldiers, double potential, double discipline) {
         this.name = name;
         this.countryOrigin = countryOrigin;
+        this.currentSector = currentSector;
+        if (maxSoldiers > MAX_SOLDIERS_POSSIBLE_VALUE) { maxSoldiers = MAX_SOLDIERS_POSSIBLE_VALUE; }
         this.maxSoldiers = maxSoldiers;
         this.currentSoldiers = maxSoldiers;
         this.potential = potential;
         this.discipline = discipline;
+
+        troopUtils.spawnTroopInSector(this, currentSector);
     }
 
     public String getName() { return name; }
@@ -22,6 +31,9 @@ public class Troop {
 
     public Country getCountryOrigin() { return countryOrigin; }
     public void setCountryOrigin(Country countryOrigin) { this.countryOrigin = countryOrigin; }
+
+    public Sector getCurrentSector() { return currentSector; }
+    public void setCurrentSector(Sector currentSector) { this.currentSector = currentSector; }
 
     public int getMaxSoldiers() { return maxSoldiers; }
     public void setMaxSoldiers(int maxSoldiers) { this.maxSoldiers = maxSoldiers; }
@@ -52,6 +64,7 @@ public class Troop {
         System.out.println("Informacion de la tropa:");
         System.out.println(" --- " + name + " --- ");
         System.out.println("Pais de Origen: " + countryOrigin.getName());
+        System.out.println("Sector Actual: " + currentSector.getName());
         System.out.println("Soldados restantes: " + currentSoldiers + "/" + maxSoldiers);
         System.out.println("Potencial: " + potential);
         System.out.println("Disciplina: " + discipline);
@@ -69,5 +82,4 @@ public class Troop {
         System.out.println("Daño minimo: " + minDamage());
         System.out.println();
     }
-
 }
